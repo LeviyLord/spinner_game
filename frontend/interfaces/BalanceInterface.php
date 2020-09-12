@@ -10,9 +10,10 @@ namespace frontend\interfaces;
  */
 interface BalanceInterface
 {
+
 	/**
 	 * @return mixed
 	 */
-	public function getPrize();
+	public function getPrize( );
 
 }
