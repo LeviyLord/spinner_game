@@ -4,6 +4,7 @@
 namespace frontend\services;
 
 use frontend\enums\PrizeTypeEnum;
+use frontend\exception\NotAvailablePrizeException;
 use frontend\interfaces\BalanceInterface;
 use frontend\strategies\prize\PrizeStrategy;
 use function Webmozart\Assert\Tests\StaticAnalysis\null;
@@ -13,10 +14,7 @@ use function Webmozart\Assert\Tests\StaticAnalysis\null;
  */
 class BalanceService implements BalanceInterface
 {
-
-	public $repository;
-
-	private $forbiddenPrizes;
+	private $prizes = [0, 1, 2];
 
 	/**
 	 * Определить тип приза
@@ -29,18 +27,19 @@ class BalanceService implements BalanceInterface
 		try {
 			$prizeType = $this->getPrizeType();
 			$prizeStrategy = new PrizeStrategy();
-			$prizeStrategy->strategyName($prizeType);
+			$prizeStrategy->setStrategyName($prizeType);
 			return $prizeStrategy->getAvailable();
 		}
 		catch (NotAvailablePrizeException $e){
+			unset($this->prizes[PrizeTypeEnum::idBy($prizeType)]);
 			return $this->getPrize();
 		}
 	}
 
 	//TODO SG-6
 	private function getPrizeType(){
-		rand(0, 2)
-		switch () {
+
+		switch (array_rand ($this->prizes)) {
 			case PrizeTypeEnum::BONUS:
 				return PrizeTypeEnum::literalBy(PrizeTypeEnum::BONUS);
 				break;

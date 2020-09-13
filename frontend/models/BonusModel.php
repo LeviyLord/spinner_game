@@ -1,8 +1,16 @@
 <?php
 
-namespace frontend\Model;
+namespace frontend\models;
 
-class BonusModel
+use yii\db\ActiveRecord;
+
+class BonusModel extends ActiveRecord
 {
-
+	/**
+	 * переопределить метод одного приза с условиями что амоун бесконечный, рандомно выдавать сумму
+	 *
+	 *
+	 * Метод: вернуть объект с заданой суммой
+	 *
+	 */
 }

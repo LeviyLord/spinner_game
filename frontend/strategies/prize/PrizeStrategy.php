@@ -6,10 +6,10 @@ namespace frontend\strategies\prize;
 
 use frontend\enums\PrizeTypeEnum;
 use frontend\strategies\BaseStrategyContextHandlers;
-use frontend\strategies\prize\handlers\Bonus;
+use frontend\strategies\prize\handlers\BonusHandler;
 use frontend\strategies\prize\handlers\HandlerInterface;
-use frontend\strategies\prize\handlers\Item;
-use frontend\strategies\prize\handlers\Money;
+use frontend\strategies\prize\handlers\ItemHandler;
+use frontend\strategies\prize\handlers\MoneyHandler;
 
 /**
  * Class PrizeStrategy
@@ -22,9 +22,9 @@ class PrizeStrategy extends BaseStrategyContextHandlers
 	public function getStrategyDefinitions()
 	{
 		return [
-			PrizeTypeEnum::BONUS_LIT => Bonus::class,
-			PrizeTypeEnum::MONEY_LIT => Money::class,
-			PrizeTypeEnum::ITEM_LIT => Item::class,
+			PrizeTypeEnum::BONUS_LIT => BonusHandler::class,
+			PrizeTypeEnum::MONEY_LIT => MoneyHandler::class,
+			PrizeTypeEnum::ITEM_LIT => ItemHandler::class,
 		];
 
 	}

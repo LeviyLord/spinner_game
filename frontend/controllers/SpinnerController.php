@@ -11,11 +11,10 @@ use yii\web\Controller;
 /**
  * Class SpinnerController
  *
- * @property-read  \frontend\interfaces\BalanceInterface $service
+ * @property-read  \frontend\interfaces\BalanceInterface $balance
  */
 class SpinnerController extends Controller
 {
-	public $service;
 
 	public function behaviors()
 	{
@@ -56,7 +55,7 @@ class SpinnerController extends Controller
 	public function actionIndex()
 	{
 		try {
-			$prize = $this->service->getPrize();
+			$prize = \Yii::$app->balance->getPrize();
 		}
 		catch (\Exception $e){
 
@@ -72,7 +71,7 @@ class SpinnerController extends Controller
 		 *
 		 *
 		*/
-		return $this->render('');
+		return $this->render('index');
 
 	}
 	/**

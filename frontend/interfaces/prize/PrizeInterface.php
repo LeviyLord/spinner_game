@@ -3,5 +3,4 @@ namespace frontend\interfaces\prize;
 
 interface PrizeInterface
 {
-
 }

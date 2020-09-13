@@ -16,8 +16,8 @@ class m200912_115324_balance extends Migration
 			'id' => $this->primaryKey(),
 			'type' => $this->integer()->notNull(),
 			'prize' => $this->string()->notNull(),
-			'amount' => $this->float()->notNull(),
-			'status' => $this->boolean()->defaultValue(true),
+			'amount' => $this->integer()->notNull(),
+			'is_enabled' => $this->boolean()->defaultValue(true),
 		]);
 
 	}

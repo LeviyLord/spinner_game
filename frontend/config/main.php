@@ -1,6 +1,9 @@
 <?php
 
 use frontend\services\BalanceService;
+use frontend\services\BonusService;
+use frontend\services\ItemService;
+use frontend\services\MoneyService;
 
 $params = array_merge(
     require __DIR__ . '/../../common/config/params.php',
@@ -45,8 +48,17 @@ return [
             'rules' => [
             ],
         ],
-		'gift' => [
+		'balance' => [
 			'class' => BalanceService::class,
+		],
+		'item' => [
+			'class' => ItemService::class
+		],
+		'bonus' => [
+			'class' => BonusService::class
+		],
+		'money' => [
+			'class' => MoneyService::class
 		],
     ],
     'params' => $params,
