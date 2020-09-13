@@ -12,7 +12,7 @@ use yii\db\ActiveRecord;
  *
  * @property int $id;
  * @property $type;
- * @property $prize;
+ * @property $title;
  * @property $amount;
  * @property $is_enabled;
  */
@@ -20,6 +20,12 @@ class Bonus extends ActiveRecord implements BonusInterface
 {
 	const MIN_SUM_BONUS = 100;
 	const MAX_SUM_BONUS = 2000;
+
+
+	public static function tableName()
+	{
+		return '{{%balance}}';
+	}
 
 	public static function findOneAvailable()
 	{

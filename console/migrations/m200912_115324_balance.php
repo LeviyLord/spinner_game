@@ -15,7 +15,7 @@ class m200912_115324_balance extends Migration
 		$this->createTable('{{%balance}}', [
 			'id' => $this->primaryKey(),
 			'type' => $this->integer()->notNull(),
-			'prize' => $this->string()->notNull(),
+			'title' => $this->string()->notNull(),
 			'amount' => $this->integer()->notNull(),
 			'is_enabled' => $this->boolean()->defaultValue(true),
 		]);

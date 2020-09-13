@@ -28,7 +28,10 @@ class UserWon extends ActiveRecord implements UserWonInterface
 		return '{{%user_won}}';
 	}
 
-
+	public function getBalance()
+	{
+		return $this->hasOne(Balance::class, ['id' => 'prize_id']);
+	}
 
 	public function rules()
 	{

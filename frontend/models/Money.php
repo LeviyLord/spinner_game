@@ -13,7 +13,7 @@ use yii\db\ActiveRecord;
  *
  * @property int $id;
  * @property $type;
- * @property $prize;
+ * @property $title;
  * @property $amount;
  * @property $is_enabled;
  */
@@ -28,7 +28,7 @@ class Money extends ActiveRecord implements MoneyInterface
 	public function rules()
 	{
 		return [
-			[['id', 'type', 'prize', 'amount', 'is_enabled'], 'safe']
+			[['id', 'type', 'title', 'amount', 'is_enabled'], 'safe']
 		];
 	}
 

@@ -39,4 +39,5 @@ abstract class AbstractPrizeService
 		return $newUserWon;
 	}
 
+	abstract public function oneAvailable(): UserWonInterface;
 }

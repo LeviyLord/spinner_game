@@ -12,12 +12,13 @@ use yii\db\Exception;
  *
  * @property int $id;
  * @property $type;
- * @property $prize;
+ * @property $title;
  * @property $amount;
  * @property $is_enabled;
  */
 class ItemPrize extends ActiveRecord implements ItemInterface
 {
+	const COUNT_ITEM = 1;
 
 
 	public static function tableName()
@@ -28,7 +29,7 @@ class ItemPrize extends ActiveRecord implements ItemInterface
 	public function rules()
 	{
 		return [
-			[['id', 'type', 'prize', 'amount', 'is_enabled'], 'safe']
+			[['id', 'type', 'title', 'amount', 'is_enabled'], 'safe']
 		];
 	}
 
@@ -38,6 +39,7 @@ class ItemPrize extends ActiveRecord implements ItemInterface
 		if (empty($prize)) {
 			throw new NotAvailablePrizeException();
 		}
+		$prize->amount = 1;
 		return $prize;
 	}
 

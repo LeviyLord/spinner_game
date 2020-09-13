@@ -4,6 +4,7 @@
 namespace frontend\controllers;
 
 
+use frontend\enums\PrizeTypeEnum;
 use yii\filters\AccessControl;
 use yii\filters\VerbFilter;
 use yii\web\Controller;
@@ -54,24 +55,13 @@ class SpinnerController extends Controller
 
 	public function actionIndex()
 	{
-		try {
-			$prize = \Yii::$app->balance->getPrize();
-		}
-		catch (\Exception $e){
+		$userWon = \Yii::$app->balance->getPrize();
 
-		}
-		/**
-		 *
-		 * запустить сервис с запросом доступный приз
 
-		 * трай кетч, на то что не удалось получить приз
-		 * флеш месадж, что не получилось получить приз
-		 * и вернуть на индекс
-
-		 *
-		 *
-		*/
-		return $this->render('index');
+		return $this->render('index', [
+			'userWon' => $userWon,
+			'showAmount' => $userWon->balance->type != PrizeTypeEnum::ITEM
+		]);
 
 	}
 	/**

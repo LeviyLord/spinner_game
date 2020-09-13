@@ -6,6 +6,7 @@ use frontend\enums\UserWonStatusEnum;
 use frontend\interfaces\BonusServiceInterface;
 use frontend\interfaces\prize\BonusInterface;
 use frontend\interfaces\prize\PrizeInterface;
+use frontend\interfaces\UserWonInterface;
 use frontend\models\Bonus;
 use frontend\models\Money;
 use frontend\models\UserWon;
@@ -18,16 +19,15 @@ class BonusService extends AbstractPrizeService implements BonusServiceInterface
 	/**
 	 * @return BonusInterface
 	 */
-	public function oneAvailable(): BonusInterface
+	public function oneAvailable(): UserWonInterface
 	{
 		$bonusPrize = Bonus::findOneAvailable();
-		$this->createFromPrize($bonusPrize);
-		return $bonusPrize;
+		return $this->createFromPrize($bonusPrize);
 	}
 
 	public function convertationMoney($userWon)
 	{
-		$bonusPrize = Bonus::createBy($userWon->amount);
+		$moneyPrize = Bonus::createBy($userWon->amount);
 		$this->updateStatusFromPrize($moneyPrize, UserWonStatusEnum::CONVERTED);
 		$this->createFromPrize($bonusPrize);
 		return $bonusPrize;
