@@ -4,8 +4,10 @@
 namespace frontend\services;
 
 use frontend\enums\PrizeTypeEnum;
+use frontend\enums\UserWonStatusEnum;
 use frontend\exception\NotAvailablePrizeException;
 use frontend\interfaces\BalanceInterface;
+use frontend\models\UserWon;
 use frontend\strategies\prize\PrizeStrategy;
 use function Webmozart\Assert\Tests\StaticAnalysis\null;
 
@@ -36,7 +38,12 @@ class BalanceService implements BalanceInterface
 		}
 	}
 
-
+	public function accept($userWonId){
+		$this->updateStatus($userWonId, UserWonStatusEnum::ACCEPTED);
+	}
+	public function cancel($userWonId){
+		$this->updateStatus($userWonId, UserWonStatusEnum::CANCELED);
+	}
 	private function getPrizeType(){
 
 		switch (array_rand ($this->prizes)) {
@@ -52,4 +59,8 @@ class BalanceService implements BalanceInterface
 		}
 	}
 
+	private function updateStatus($userWonId, $status){
+		$userWon = UserWon::findOne($userWonId);
+		$userWon->setStatus($status);
+	}
 }

@@ -5,6 +5,7 @@ namespace frontend\controllers;
 
 
 use frontend\enums\PrizeTypeEnum;
+use yii\base\InvalidArgumentException;
 use yii\filters\AccessControl;
 use yii\filters\VerbFilter;
 use yii\web\Controller;
@@ -25,7 +26,7 @@ class SpinnerController extends Controller
 				'only' => ['index'],
 				'rules' => [
 					[
-						'actions' => ['index'],
+						'actions' => ['index', 'accept', 'cancel'],
 						'allow' => true,
 						'roles' => ['@'],
 					],
@@ -64,12 +65,34 @@ class SpinnerController extends Controller
 		]);
 
 	}
-	/**
-		* Записать в таблицу юзер_вон приз полученный игроком
-		*
-		* или не получилось записать приз на счет юзера
-	 */
 
+	public function actionAccept(int $userWonId)
+	{
+		$success = true;
+		$message = \Yii::t('spinner', 'Balance accepted successfully');
+		try{
+			\Yii::$app->balance->accept($userWonId);
+		} catch (InvalidArgumentException $e){
+			$success = false;
+			$message = $e->getMessage();
+		}
+		\Yii::$app->session->setFlash('response', compact('success','message'));
+		return $this->redirect('/');
+	}
+
+	public function actionCancel(int $userWonId)
+	{
+		$success = true;
+		$message = \Yii::t('spinner', 'Balance canceled successfully');
+		try{
+			\Yii::$app->balance->cancel($userWonId);
+		} catch (InvalidArgumentException $e){
+			$success = false;
+			$message = $e->getMessage();
+		}
+		\Yii::$app->session->setFlash('response', compact('success','message'));
+		return $this->redirect('/');
+	}
 
 
 }

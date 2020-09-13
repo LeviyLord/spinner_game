@@ -60,6 +60,20 @@ return [
 		'money' => [
 			'class' => MoneyService::class
 		],
+		'i18n' => [
+			'translations' => [
+				'*' => [
+					'class' => 'yii\i18n\PhpMessageSource',
+					'basePath' => '@frontend/messages',
+					'sourceLanguage' => 'ru-RU',
+					'fileMap' => [
+						'basic'     => 'basic.php',
+						'app'       => 'app.php',
+						'app/error' => 'error.php',
+					],
+				],
+			],
+		],
     ],
     'params' => $params,
 ];

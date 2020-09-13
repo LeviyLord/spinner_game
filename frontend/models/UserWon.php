@@ -2,10 +2,13 @@
 
 namespace frontend\models;
 
+use frontend\enums\UserWonStatusEnum;
 use frontend\exception\NotAvailablePrizeException;
 use frontend\interfaces\prize\MoneyInterface;
 use frontend\interfaces\prize\PrizeInterface;
 use frontend\interfaces\UserWonInterface;
+use http\Exception\InvalidArgumentException;
+use phpDocumentor\Reflection\Types\Self_;
 use function Webmozart\Assert\Tests\StaticAnalysis\true;
 use yii\db\ActiveRecord;
 
@@ -22,6 +25,13 @@ use yii\db\ActiveRecord;
  */
 class UserWon extends ActiveRecord implements UserWonInterface
 {
+
+	const ACCEPTED_STATUSES = [
+		UserWonStatusEnum::ACCEPTED,
+		UserWonStatusEnum::CANCELED,
+		UserWonStatusEnum::CONVERTED,
+		UserWonStatusEnum::APPROVAL
+	];
 
 	public static function tableName()
 	{
@@ -40,6 +50,12 @@ class UserWon extends ActiveRecord implements UserWonInterface
 		];
 	}
 
+	public function setStatus(string $status)
+	{
+		if(!in_array($status, self::ACCEPTED_STATUSES)){
+			throw new InvalidArgumentException('status is not available');
+		}
+	}
 
 
 }

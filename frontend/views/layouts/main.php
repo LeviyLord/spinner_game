@@ -24,9 +24,11 @@ AppAsset::register($this);
     <?php $this->head() ?>
 </head>
 <body>
+
 <?php $this->beginBody() ?>
 
 <div class="wrap">
+
     <?php
     NavBar::begin([
         'brandLabel' => Yii::$app->name,
@@ -63,6 +65,14 @@ AppAsset::register($this);
             'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
         ]) ?>
         <?= Alert::widget() ?>
+		<?php if (Yii::$app->session->hasFlash('response')):
+			$response = Yii::$app->session->getFlash('response')
+			?>
+            <div class="alert alert-<?=$response['success'] ? 'success' : 'danger'?> alert-dismissable">
+                <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
+				<?=$response['message']?>
+            </div>
+		<?php endif; ?>
         <?= $content ?>
     </div>
 </div>
