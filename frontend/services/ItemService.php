@@ -5,7 +5,7 @@ namespace frontend\services;
 
 use frontend\interfaces\ItemServiceInterface;
 use frontend\interfaces\prize\ItemInterface;
-use frontend\models\ItemModel;
+use frontend\models\ItemPrize;
 
 class ItemService extends AbstractPrizeService implements ItemServiceInterface
 {
@@ -15,6 +15,8 @@ class ItemService extends AbstractPrizeService implements ItemServiceInterface
 	 */
 	public function oneAvailable(): ItemInterface
 	{
-		return ItemModel::findOneAvailable();
+		$itemPrize = ItemPrize::findOneAvailable();
+		$this->createFromPrize($itemPrize);
+		return $itemPrize;
 	}
 }

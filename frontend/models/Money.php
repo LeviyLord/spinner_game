@@ -3,17 +3,22 @@
 namespace frontend\models;
 
 use frontend\exception\NotAvailablePrizeException;
-use frontend\interfaces\prize\ItemInterface;
-use yii\db\ActiveRecord;
-use yii\db\Exception;
+use frontend\interfaces\prize\MoneyInterface;
 
-class ItemModel extends ActiveRecord implements ItemInterface
+use yii\db\ActiveRecord;
+
+
+/**
+ * Class Money
+ *
+ * @property int $id;
+ * @property $type;
+ * @property $prize;
+ * @property $amount;
+ * @property $is_enabled;
+ */
+class Money extends ActiveRecord implements MoneyInterface
 {
-	public $id;
-	public $type;
-	public $prize;
-	public $amount;
-	public $is_enabled;
 
 	public static function tableName()
 	{
@@ -29,24 +34,24 @@ class ItemModel extends ActiveRecord implements ItemInterface
 
 	public static function findOneAvailable()
 	{
-		$prize = parent::findOne(['type' => 2, 'is_enabled' => true]);
-		if (empty($prize)){
+		$prize = parent::findOne(['type' => 1, 'is_enabled' => true]);
+		if (empty($prize)) {
 			throw new NotAvailablePrizeException();
 		}
 		return $prize;
 	}
 
-	public static function checkOneAvailable()
+	public function checkCapacity()
 	{
-		$prize = parent::findOne(['type' => 2, 'is_enabled' => true]);
-		if (empty($prize)){
+		if ($this->amount < 5) {
+			$this->is_enabled = false;
+			$this->update();
 			throw new NotAvailablePrizeException();
 		}
-		return $prize;
 	}
+
+
 	/**
-	 * переопределить метод одного приза с условиями, что тип 2 а доступность тру
-	 * если таких нет, вернуть NotAvailablePrizeException
 	 *
 	 * Другой метод: матод по id проверить, что все еще доступно.
 	 *

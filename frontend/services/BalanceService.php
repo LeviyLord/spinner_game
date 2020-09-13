@@ -36,7 +36,7 @@ class BalanceService implements BalanceInterface
 		}
 	}
 
-	//TODO SG-6
+
 	private function getPrizeType(){
 
 		switch (array_rand ($this->prizes)) {

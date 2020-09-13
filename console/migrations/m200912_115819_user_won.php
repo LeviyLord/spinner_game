@@ -17,6 +17,7 @@ class m200912_115819_user_won extends Migration
 			'user_id' => $this->integer()->notNull(),
 			'prize_id' => $this->integer()->notNull(),
 			'status' => $this->integer()->notNull(),
+			'amount' => $this->integer()->notNull(),
 			'create_at' => $this->timestamp()->defaultExpression('NOW()'),
 			'update_at' => $this->timestamp()
 		]);

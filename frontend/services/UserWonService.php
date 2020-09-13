@@ -4,7 +4,7 @@
 namespace frontend\services;
 
 
-class UserWonService
+class UserWonService implements UserWonInterface
 {
 	/**
 	 * Реализовать метод создания записи в таблицу
