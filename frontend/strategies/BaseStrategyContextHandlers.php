@@ -19,21 +19,34 @@ use yii2lab\domain\helpers\ErrorCollection;
 abstract class BaseStrategyContextHandlers extends BaseStrategyContext {
 	
 	private $strategyDefinitions = [];
-	
+
+	/**
+	 * @return array
+	 */
 	public function getStrategyDefinitions() {
 		return $this->strategyDefinitions;
 	}
-	
+
+	/**
+	 * @param array $handlers
+	 */
 	public function setStrategyDefinitions(array $handlers) {
 		$this->strategyDefinitions = $handlers;
 	}
-	
+
+	/**
+	 * @param string $strategyName
+	 * @throws \Exception
+	 */
 	public function setStrategyName(string $strategyName) {
 		$this->validate($strategyName);
 		$strategyDefinition = ArrayHelper::getValue($this->getStrategyDefinitions(), $strategyName);
 		$this->setStrategyDefinition($strategyDefinition);
 	}
-	
+
+	/**
+	 * @param $name
+	 */
 	protected function validate($name) {
 		$strategyHandlers = $this->getStrategyDefinitions();
 		if(empty($strategyHandlers)) {

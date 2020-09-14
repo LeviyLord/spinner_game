@@ -15,15 +15,24 @@ use yii2lab\extension\common\helpers\ClassHelper;
 abstract class BaseStrategyContext extends BaseObject {
 	
 	private $strategyInstance;
-	
+
+	/**
+	 * @return Object
+	 */
 	public function getStrategyInstance() {
 		return $this->strategyInstance;
 	}
-	
+
+	/**
+	 * @param Object $strategyInstance
+	 */
 	public function setStrategyInstance(Object $strategyInstance) {
 		$this->strategyInstance = $strategyInstance;
 	}
-	
+
+	/**
+	 * @param $strategyDefinition
+	 */
 	public function setStrategyDefinition($strategyDefinition) {
 		$strategyInstance = new $strategyDefinition();
 		$this->setStrategyInstance($strategyInstance);

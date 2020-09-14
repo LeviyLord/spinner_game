@@ -12,7 +12,8 @@ class ItemService extends AbstractPrizeService implements ItemServiceInterface
 {
 
 	/**
-	 * @return ItemInterface
+	 * @return UserWonInterface
+	 * @throws \frontend\exception\NotAvailablePrizeException
 	 */
 	public function oneAvailable(): UserWonInterface
 	{

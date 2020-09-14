@@ -18,7 +18,7 @@ return [
     'controllerMap' => [
         'fixture' => [
 			'class' => 'yii\faker\FixtureController',
-			'templatePath' => '@tests/codeception/common/templates',
+			'templatePath' => '@tests/unit/fixtures/templates',
           ],
     ],
     'components' => [

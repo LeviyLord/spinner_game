@@ -13,7 +13,7 @@ class MoneyService extends AbstractPrizeService implements MoneyServiceInterface
 
 
 	/**
-	 * @return MoneyInterface
+	 * @return UserWonInterface
 	 * @throws \frontend\exception\NotAvailablePrizeException
 	 */
 	public function oneAvailable(): UserWonInterface

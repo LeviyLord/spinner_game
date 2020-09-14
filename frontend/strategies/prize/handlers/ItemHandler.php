@@ -9,8 +9,9 @@ use frontend\interfaces\UserWonInterface;
 
 class ItemHandler implements HandlerInterface
 {
+
 	/**
-	 * @return mixed
+	 * @return UserWonInterface
 	 */
 	public function getAvailable(): UserWonInterface
 	{

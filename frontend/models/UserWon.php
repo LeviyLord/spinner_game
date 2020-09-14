@@ -33,16 +33,25 @@ class UserWon extends ActiveRecord implements UserWonInterface
 		UserWonStatusEnum::APPROVAL
 	];
 
+	/**
+	 * @return string
+	 */
 	public static function tableName()
 	{
 		return '{{%user_won}}';
 	}
 
+	/**
+	 * @return \yii\db\ActiveQuery
+	 */
 	public function getBalance()
 	{
 		return $this->hasOne(Balance::class, ['id' => 'prize_id']);
 	}
 
+	/**
+	 * @return array
+	 */
 	public function rules()
 	{
 		return [
@@ -50,6 +59,9 @@ class UserWon extends ActiveRecord implements UserWonInterface
 		];
 	}
 
+	/**
+	 * @param string $status
+	 */
 	public function setStatus(string $status)
 	{
 		if(!in_array($status, self::ACCEPTED_STATUSES)){

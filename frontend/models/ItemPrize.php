@@ -21,11 +21,17 @@ class ItemPrize extends ActiveRecord implements ItemInterface
 	const COUNT_ITEM = 1;
 
 
+	/**
+	 * @return string
+	 */
 	public static function tableName()
 	{
 		return '{{%balance}}';
 	}
 
+	/**
+	 * @return array
+	 */
 	public function rules()
 	{
 		return [
@@ -33,6 +39,10 @@ class ItemPrize extends ActiveRecord implements ItemInterface
 		];
 	}
 
+	/**
+	 * @return ActiveRecord|null
+	 * @throws NotAvailablePrizeException
+	 */
 	public static function findOneAvailable()
 	{
 		$prize = parent::findOne(['type' => 2, 'is_enabled' => true]);
@@ -43,6 +53,10 @@ class ItemPrize extends ActiveRecord implements ItemInterface
 		return $prize;
 	}
 
+	/**
+	 * @return ActiveRecord|null
+	 * @throws NotAvailablePrizeException
+	 */
 	public static function checkOneAvailable()
 	{
 		$prize = parent::findOne(['type' => 2, 'is_enabled' => true]);
@@ -51,15 +65,4 @@ class ItemPrize extends ActiveRecord implements ItemInterface
 		}
 		return $prize;
 	}
-	/**
-	 * переопределить метод одного приза с условиями, что тип 2 а доступность тру
-	 * если таких нет, вернуть NotAvailablePrizeException
-	 *
-	 * Другой метод: матод по id проверить, что все еще доступно.
-	 *
-	 *
-	 * Метод: отнятия эмоут(колличества) вещей, если после отнятия = 0, то ставить изэвэйлбл = 0
-	 *
-	 */
-
 }

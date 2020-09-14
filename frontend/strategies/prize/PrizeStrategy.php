@@ -18,7 +18,10 @@ use frontend\strategies\prize\handlers\MoneyHandler;
  */
 class PrizeStrategy extends BaseStrategyContextHandlers
 {
-	
+
+	/**
+	 * @return array
+	 */
 	public function getStrategyDefinitions()
 	{
 		return [
@@ -28,7 +31,10 @@ class PrizeStrategy extends BaseStrategyContextHandlers
 		];
 
 	}
-	
+
+	/**
+	 * @return mixed
+	 */
 	public function getAvailable()
 	{
 		return $this->strategyInstance->getAvailable();

@@ -20,11 +20,17 @@ use yii\db\ActiveRecord;
 class Money extends ActiveRecord implements MoneyInterface
 {
 
+	/**
+	 * @return string
+	 */
 	public static function tableName()
 	{
 		return '{{%balance}}';
 	}
 
+	/**
+	 * @return array
+	 */
 	public function rules()
 	{
 		return [
@@ -32,6 +38,10 @@ class Money extends ActiveRecord implements MoneyInterface
 		];
 	}
 
+	/**
+	 * @return ActiveRecord|null
+	 * @throws NotAvailablePrizeException
+	 */
 	public static function findOneAvailable()
 	{
 		$prize = parent::findOne(['type' => 1, 'is_enabled' => true]);
@@ -41,6 +51,11 @@ class Money extends ActiveRecord implements MoneyInterface
 		return $prize;
 	}
 
+	/**
+	 * @throws NotAvailablePrizeException
+	 * @throws \Throwable
+	 * @throws \yii\db\StaleObjectException
+	 */
 	public function checkCapacity()
 	{
 		if ($this->amount < 5) {
@@ -49,15 +64,5 @@ class Money extends ActiveRecord implements MoneyInterface
 			throw new NotAvailablePrizeException();
 		}
 	}
-
-
-	/**
-	 *
-	 * Другой метод: матод по id проверить, что все еще доступно.
-	 *
-	 *
-	 * Метод: отнятия эмоут(колличества) вещей, если после отнятия = 0, то ставить изэвэйлбл = 0
-	 *
-	 */
 
 }

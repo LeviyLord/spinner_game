@@ -19,11 +19,7 @@ class BalanceService implements BalanceInterface
 	private $prizes = [0, 1, 2];
 
 	/**
-	 * Определить тип приза
-	 *
-	 * Определить доступный приз ()
-	 *
-	 * Вернуть доступный приз
+	 * @return mixed
 	 */
 	public function getPrize(){
 		try {
@@ -38,12 +34,23 @@ class BalanceService implements BalanceInterface
 		}
 	}
 
+	/**
+	 * @param $userWonId
+	 */
 	public function accept($userWonId){
 		$this->updateStatus($userWonId, UserWonStatusEnum::ACCEPTED);
 	}
+
+	/**
+	 * @param $userWonId
+	 */
 	public function cancel($userWonId){
 		$this->updateStatus($userWonId, UserWonStatusEnum::CANCELED);
 	}
+
+	/**
+	 * @return string
+	 */
 	private function getPrizeType(){
 
 		switch (array_rand ($this->prizes)) {
@@ -59,6 +66,10 @@ class BalanceService implements BalanceInterface
 		}
 	}
 
+	/**
+	 * @param $userWonId
+	 * @param $status
+	 */
 	private function updateStatus($userWonId, $status){
 		$userWon = UserWon::findOne($userWonId);
 		$userWon->setStatus($status);

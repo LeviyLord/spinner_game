@@ -23,6 +23,10 @@ class PrizeTypeEnum
 		return $list[$id];
 	}
 
+	/**
+	 * @param string $lit
+	 * @return int
+	 */
 	public static function idBy(string $lit)
 	{
 		$list = [self::BONUS_LIT => self::BONUS, self::MONEY_LIT => self::MONEY, self::ITEM_LIT => self::ITEM];

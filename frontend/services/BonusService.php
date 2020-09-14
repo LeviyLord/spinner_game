@@ -16,8 +16,9 @@ class BonusService extends AbstractPrizeService implements BonusServiceInterface
 {
 	const COEFFICIENT = 0.8;
 
+
 	/**
-	 * @return BonusInterface
+	 * @return UserWonInterface
 	 */
 	public function oneAvailable(): UserWonInterface
 	{
@@ -25,6 +26,10 @@ class BonusService extends AbstractPrizeService implements BonusServiceInterface
 		return $this->createFromPrize($bonusPrize);
 	}
 
+	/**
+	 * @param $userWon
+	 * @return mixed
+	 */
 	public function convertationMoney($userWon)
 	{
 		$moneyPrize = Bonus::createBy($userWon->amount);

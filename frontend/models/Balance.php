@@ -20,11 +20,17 @@ use yii\db\ActiveRecord;
 class Balance extends ActiveRecord
 {
 
+	/**
+	 * @return string
+	 */
 	public static function tableName()
 	{
 		return '{{%balance}}';
 	}
 
+	/**
+	 * @return array
+	 */
 	public function rules()
 	{
 		return [

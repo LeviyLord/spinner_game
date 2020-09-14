@@ -18,6 +18,9 @@ use yii\web\Controller;
 class SpinnerController extends Controller
 {
 
+	/**
+	 * @return array
+	 */
 	public function behaviors()
 	{
 		return [
@@ -41,6 +44,9 @@ class SpinnerController extends Controller
 		];
 	}
 
+	/**
+	 * @return array
+	 */
 	public function actions()
 	{
 		return [
@@ -54,6 +60,9 @@ class SpinnerController extends Controller
 		];
 	}
 
+	/**
+	 * @return string
+	 */
 	public function actionIndex()
 	{
 		$userWon = \Yii::$app->balance->getPrize();
@@ -66,6 +75,10 @@ class SpinnerController extends Controller
 
 	}
 
+	/**
+	 * @param int $userWonId
+	 * @return \yii\web\Response
+	 */
 	public function actionAccept(int $userWonId)
 	{
 		$success = true;
@@ -80,6 +93,10 @@ class SpinnerController extends Controller
 		return $this->redirect('/');
 	}
 
+	/**
+	 * @param int $userWonId
+	 * @return \yii\web\Response
+	 */
 	public function actionCancel(int $userWonId)
 	{
 		$success = true;

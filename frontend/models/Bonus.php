@@ -22,11 +22,17 @@ class Bonus extends ActiveRecord implements BonusInterface
 	const MAX_SUM_BONUS = 2000;
 
 
+	/**
+	 * @return string
+	 */
 	public static function tableName()
 	{
 		return '{{%balance}}';
 	}
 
+	/**
+	 * @return ActiveRecord|null
+	 */
 	public static function findOneAvailable()
 	{
 		$randAmount = rand(self::MIN_SUM_BONUS, self::MAX_SUM_BONUS);
@@ -35,6 +41,10 @@ class Bonus extends ActiveRecord implements BonusInterface
 		return $prize;
 	}
 
+	/**
+	 * @param int $amount
+	 * @return Bonus
+	 */
 	public static function createBy(int $amount)
 	{
 		$prize = new self;
@@ -42,11 +52,4 @@ class Bonus extends ActiveRecord implements BonusInterface
 		return $prize;
 	}
 
-	/**
-	 * переопределить метод одного приза с условиями что амоун бесконечный, рандомно выдавать сумму
-	 *
-	 *
-	 * Метод: вернуть объект с заданой суммой
-	 *
-	 */
 }

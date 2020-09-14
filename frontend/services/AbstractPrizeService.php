@@ -31,6 +31,11 @@ abstract class AbstractPrizeService
 		return $newUserWon;
 	}
 
+	/**
+	 * @param PrizeInterface $prize
+	 * @param $status
+	 * @return UserWonInterface
+	 */
 	protected  function updateStatusFromPrize(PrizeInterface $prize, $status): UserWonInterface
 	{
 		$newUserWon->find();
@@ -39,5 +44,8 @@ abstract class AbstractPrizeService
 		return $newUserWon;
 	}
 
+	/**
+	 * @return UserWonInterface
+	 */
 	abstract public function oneAvailable(): UserWonInterface;
 }
