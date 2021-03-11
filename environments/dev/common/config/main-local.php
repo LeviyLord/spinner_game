@@ -3,9 +3,9 @@ return [
     'components' => [
         'db' => [
 			'class' => 'yii\db\Connection',
-			'dsn' => 'pgsql:host=localhost;dbname=spinner_game',
-			'username' => 'postgres',
-			'password' => '',
+			'dsn' => 'mysql:host=localhost;dbname=spinner_game',
+			'username' => 'root',
+			'password' => 'root',
 			'charset' => 'utf8',
         ],
         'mailer' => [

@@ -24,8 +24,8 @@ abstract class AbstractPrizeService
 			'prize_id' => $prize->id,
 			'amount' => $prize->amount,
 			'status' => UserWonStatusEnum::APPROVAL,
-			'create_at' => date(DATE_ISO8601),
-			'update_at' => date(DATE_ISO8601),
+			'create_at' => date(DATE_W3C),
+			'update_at' => date(DATE_W3C),
 		]);
 		$newUserWon->save();
 		return $newUserWon;
