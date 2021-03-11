@@ -19,6 +19,7 @@ use yii\db\ActiveRecord;
  */
 class Money extends ActiveRecord implements MoneyInterface
 {
+	const MIN_SUM_MONEY = 6;
 
 	/**
 	 * @return string
@@ -48,6 +49,8 @@ class Money extends ActiveRecord implements MoneyInterface
 		if (empty($prize)) {
 			throw new NotAvailablePrizeException();
 		}
+		$randAmount = rand(self::MIN_SUM_MONEY, $prize->amount);
+		$prize->amount = $randAmount;
 		return $prize;
 	}
 

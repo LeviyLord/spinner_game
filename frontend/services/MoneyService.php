@@ -2,7 +2,7 @@
 
 namespace frontend\services;
 
-use frontend\interfaces\MoneyServiceInterface;
+use frontend\interfaces\services\MoneyServiceInterface;
 use frontend\interfaces\prize\MoneyInterface;
 use frontend\interfaces\UserWonInterface;
 use frontend\models\Money;

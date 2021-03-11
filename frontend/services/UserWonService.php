@@ -4,15 +4,36 @@
 namespace frontend\services;
 
 
-class UserWonService implements UserWonInterface
+use frontend\interfaces\repositories\UserWonRepositoryInterface;
+use frontend\interfaces\services\UserWonServiceInterface;
+
+/**
+ * Class BalanceService
+ *
+ * @property-read  UserWonRepositoryInterface $repository
+ */
+class UserWonService implements UserWonServiceInterface
 {
 	/**
 	 * Реализовать метод создания записи в таблицу
 	 *
 	 * Реализовать метод получения записи по параметрам
 	 *
-	 * Реализовать метод смены статуса
 	 *
 	 */
+
+	/**
+	 * @param $userWonId
+	 */
+	public function accept($userWonId){
+		$this->repository->accept($userWonId);
+	}
+
+	/**
+	 * @param $userWonId
+	 */
+	public function cancel($userWonId){
+		$this->repository->cancel($userWonId);
+	}
 
 }

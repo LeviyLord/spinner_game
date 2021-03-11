@@ -20,7 +20,10 @@ $amount = $showAmount ? $userWon->amount : '';
         <p class="lead">Вы можете попробовать забрать приз, ведь колличество ограничено или отказаться от него, также
             если приз денежный, его можно конвертировать в бонусы.</p>
 
-        <p><a class="btn btn-lg btn-success" href="/spinner/convert?userWonId=<?= $userWon->id ?>"">Конвертировать в бонусы</a>
+        <p>
+            <?php if ($userWon->prize_id == 1): ?>
+            <a class="btn btn-lg btn-success" href="/spinner/convert?userWonId=<?= $userWon->id ?>"">Конвертировать в бонусы</a>
+            <? endif; ?>
             <a class="btn btn-lg btn-success" href="/spinner/accept?userWonId=<?= $userWon->id ?>">Принять</a>
             <a class="btn btn-lg btn-success" href="/spinner/cancel?userWonId=<?= $userWon->id ?>"">Отказаться</a></p>
     </div>

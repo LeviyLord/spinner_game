@@ -3,7 +3,7 @@
 namespace frontend\services;
 
 
-use frontend\interfaces\ItemServiceInterface;
+use frontend\interfaces\services\ItemServiceInterface;
 use frontend\interfaces\prize\ItemInterface;
 use frontend\interfaces\UserWonInterface;
 use frontend\models\ItemPrize;

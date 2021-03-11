@@ -5,6 +5,7 @@ namespace frontend\controllers;
 
 
 use frontend\enums\PrizeTypeEnum;
+use frontend\exception\NotAvailablePrizeException;
 use yii\base\InvalidArgumentException;
 use yii\filters\AccessControl;
 use yii\filters\VerbFilter;
@@ -13,7 +14,8 @@ use yii\web\Controller;
 /**
  * Class SpinnerController
  *
- * @property-read  \frontend\interfaces\BalanceInterface $balance
+ * @property-read  \frontend\interfaces\services\BalanceServiceInterface $balance
+ * @property-read  \frontend\interfaces\services\UserWonServiceInterface $userWon
  */
 class SpinnerController extends Controller
 {
@@ -84,7 +86,7 @@ class SpinnerController extends Controller
 		$success = true;
 		$message = \Yii::t('spinner', 'Balance accepted successfully');
 		try{
-			\Yii::$app->balance->accept($userWonId);
+			\Yii::$app->userWon->accept($userWonId);
 		} catch (InvalidArgumentException $e){
 			$success = false;
 			$message = $e->getMessage();
@@ -102,8 +104,11 @@ class SpinnerController extends Controller
 		$success = true;
 		$message = \Yii::t('spinner', 'Balance canceled successfully');
 		try{
-			\Yii::$app->balance->cancel($userWonId);
+			\Yii::$app->userWon->cancel($userWonId);
 		} catch (InvalidArgumentException $e){
+			$success = false;
+			$message = $e->getMessage();
+		} catch (NotAvailablePrizeException $e){
 			$success = false;
 			$message = $e->getMessage();
 		}

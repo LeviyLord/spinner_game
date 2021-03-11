@@ -1,9 +1,12 @@
 <?php
 
+use frontend\repositories\BalanceRepository;
+use frontend\repositories\UserWonRepository;
 use frontend\services\BalanceService;
 use frontend\services\BonusService;
 use frontend\services\ItemService;
 use frontend\services\MoneyService;
+use frontend\services\UserWonService;
 
 $params = array_merge(
 	require __DIR__ . '/../../common/config/params.php',
@@ -50,6 +53,11 @@ return [
 		],
 		'balance' => [
 			'class' => BalanceService::class,
+			'repository' => new BalanceRepository(),
+		],
+		'userWon' => [
+			'class' => UserWonService::class,
+			'repository' => new UserWonRepository(),
 		],
 		'item' => [
 			'class' => ItemService::class
