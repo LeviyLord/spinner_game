@@ -41,15 +41,4 @@ class Bonus extends ActiveRecord implements BonusInterface
 		return $prize;
 	}
 
-	/**
-	 * @param int $amount
-	 * @return Bonus
-	 */
-	public static function createBy(int $amount)
-	{
-		$prize = new self;
-
-		return $prize;
-	}
-
 }

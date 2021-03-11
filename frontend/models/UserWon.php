@@ -32,7 +32,7 @@ class UserWon extends ActiveRecord implements UserWonInterface
 		UserWonStatusEnum::CONVERTED,
 		UserWonStatusEnum::APPROVAL
 	];
-
+	const CONVERSION_COEFFICIENT = 1.2;
 	/**
 	 * @return string
 	 */

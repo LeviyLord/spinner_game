@@ -14,9 +14,6 @@ use Yii;
 
 class BonusService extends AbstractPrizeService implements BonusServiceInterface
 {
-	const COEFFICIENT = 0.8;
-
-
 	/**
 	 * @return UserWonInterface
 	 */
@@ -26,16 +23,15 @@ class BonusService extends AbstractPrizeService implements BonusServiceInterface
 		return $this->createFromPrize($bonusPrize);
 	}
 
+
 	/**
-	 * @param $userWon
-	 * @return mixed
+	 * @param $bonusAmount
 	 */
-	public function convertationMoney($userWon)
+	public function createConvertedGift($bonusAmount)
 	{
-		$moneyPrize = Bonus::createBy($userWon->amount);
-		$this->updateStatusFromPrize($moneyPrize, UserWonStatusEnum::CONVERTED);
-		$this->createFromPrize($bonusPrize);
-		return $bonusPrize;
+		$bonusPrize = Bonus::findOneAvailable();
+		$bonusPrize->amount = $bonusAmount;
+		$this->createFromPrize($bonusPrize, UserWonStatusEnum::ACCEPTED);
 	}
 
 }

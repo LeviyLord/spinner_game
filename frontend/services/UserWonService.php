@@ -36,4 +36,14 @@ class UserWonService implements UserWonServiceInterface
 		$this->repository->cancel($userWonId);
 	}
 
+	/**
+	 * @param $userWonId
+	 * @return mixed
+	 */
+	public function convertationMoney($userWonId)
+	{
+		$bonusAmount = $this->repository->convertationMoney($userWonId);
+		return $bonusAmount;
+	}
+
 }

@@ -5,10 +5,13 @@ namespace frontend\repositories;
 use frontend\enums\PrizeTypeEnum;
 use frontend\enums\UserWonStatusEnum;
 use frontend\exception\NotAvailablePrizeException;
+use frontend\interfaces\repositories\UserWonRepositoryInterface;
+use frontend\models\Bonus;
 use frontend\models\UserWon;
+use frontend\services\BonusService;
 use http\Exception\InvalidArgumentException;
 
-class UserWonRepository
+class UserWonRepository implements UserWonRepositoryInterface
 {
 	/**
 	 * @param $userWonId
@@ -31,6 +34,20 @@ class UserWonRepository
 	public function cancel($userWonId){
 		$userWon = UserWon::findOne($userWonId);
 		$this->updateStatus($userWon, UserWonStatusEnum::CANCELED);
+	}
+
+	/**
+	 * @param $userWonId
+	 * @return mixed
+	 */
+	public function convertationMoney($userWonId)
+	{
+		$userWon = UserWon::findOne($userWonId);
+		$bonusAmount = floor($userWon->amount*UserWon::CONVERSION_COEFFICIENT);
+		\Yii::$app->bonus->createConvertedGift($bonusAmount);
+		$this->updateStatus($userWon, UserWonStatusEnum::CONVERTED);
+
+		return $bonusAmount;
 	}
 
 	/**

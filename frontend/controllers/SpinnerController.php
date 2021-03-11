@@ -90,6 +90,9 @@ class SpinnerController extends Controller
 		} catch (InvalidArgumentException $e){
 			$success = false;
 			$message = $e->getMessage();
+		} catch (NotAvailablePrizeException $e){
+			$success = false;
+			$message = $e->getMessage();
 		}
 		\Yii::$app->session->setFlash('response', compact('success','message'));
 		return $this->redirect('/');
@@ -116,5 +119,22 @@ class SpinnerController extends Controller
 		return $this->redirect('/');
 	}
 
+	/**
+	 * @param int $userWonId
+	 * @return \yii\web\Response
+	 */
+	public function actionConvert(int $userWonId)
+	{
+		$success = true;
+		try{
+			$bonusAmount = \Yii::$app->userWon->convertationMoney($userWonId);
+		} catch (InvalidArgumentException $e){
+			$success = false;
+			$message = $e->getMessage();
+		}
+		$message = \Yii::t('spinner', 'Balance convertation successfully. Bonuses: ').$bonusAmount;
+		\Yii::$app->session->setFlash('response', compact('success','message'));
+		return $this->redirect('/');
+	}
 
 }

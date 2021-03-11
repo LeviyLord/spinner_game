@@ -16,4 +16,10 @@ interface UserWonServiceInterface
 	 */
 	public function cancel($userWonId);
 
+	/**
+	 * @param $userWonId
+	 * @return mixed
+	 */
+	public function convertationMoney($userWonId);
+
 }

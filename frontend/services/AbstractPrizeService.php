@@ -14,16 +14,18 @@ abstract class AbstractPrizeService
 {
 	/**
 	 * @param PrizeInterface $prize
+	 * @param int|null $status
+	 *
 	 * @return UserWonInterface
 	 */
-	protected  function createFromPrize(PrizeInterface $prize): UserWonInterface
+	protected  function createFromPrize(PrizeInterface $prize, $status = null): UserWonInterface
 	{
 		$newUserWon = new UserWon();
 		$newUserWon->setAttributes([
 			'user_id' => Yii::$app->user->id,
 			'prize_id' => $prize->id,
 			'amount' => $prize->amount,
-			'status' => UserWonStatusEnum::APPROVAL,
+			'status' => $status ?? UserWonStatusEnum::APPROVAL,
 			'create_at' => date(DATE_W3C),
 			'update_at' => date(DATE_W3C),
 		]);
