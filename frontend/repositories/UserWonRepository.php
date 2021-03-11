@@ -16,7 +16,7 @@ class UserWonRepository
 	public function accept($userWonId){
 		$userWon = UserWon::findOne($userWonId);
 		if($userWon->balance->type != PrizeTypeEnum::BONUS) {
-			$responseBalance = \Yii::$app->balance->acceptWon($userWon);
+			$responseBalance = \Yii::$app->balance->removeGiftAmountFromBalance($userWon->prize_id, $userWon->amount);
 		}
 		if ($responseBalance == true) {
 			$this->updateStatus($userWon, UserWonStatusEnum::ACCEPTED);

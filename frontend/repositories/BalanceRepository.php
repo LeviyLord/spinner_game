@@ -13,13 +13,16 @@ use phpDocumentor\Reflection\Types\Boolean;
 
 class BalanceRepository implements BalanceRepositoryInterface
 {
-	private $prizes = [0, 1, 2];
+	private $prizes = [
+		PrizeTypeEnum::BONUS,
+		PrizeTypeEnum::MONEY,
+		PrizeTypeEnum::ITEM
+	];
 
 	public function getPrize() {
 		try {
-			$prizeType = $this->getPrizeType();
-			$prizeStrategy = new PrizeStrategy();
-			$prizeStrategy->setStrategyName($prizeType);
+			$prizeType = $this->getRandomPrizeType();
+			$prizeStrategy = new PrizeStrategy($prizeType);
 			return $prizeStrategy->getAvailable();
 		}
 		catch (NotAvailablePrizeException $e){
@@ -31,7 +34,7 @@ class BalanceRepository implements BalanceRepositoryInterface
 	/**
 	 * @return string
 	 */
-	private function getPrizeType(){
+	private function getRandomPrizeType(){
 
 		switch (array_rand ($this->prizes)) {
 			case PrizeTypeEnum::BONUS:
@@ -48,16 +51,18 @@ class BalanceRepository implements BalanceRepositoryInterface
 
 
 	/**
-	 * @param UserWon $userWon
+	 * @param $prize_id
+	 * @param $amount
+	 *
 	 * @return bool|null
 	 */
-	public function acceptWon($userWon) {
-		$prize = Balance::findOne($userWon->prize_id);
+	public function removeGiftAmountFromBalance($prize_id, $amount) {
+		$prize = Balance::findOne($prize_id);
 		if ($prize->type == PrizeTypeEnum::MONEY) {
-			return $this->reduceMoney($prize, $userWon);
+			return $this->reduceMoney($prize, $amount);
 		}
 		if ($prize->type == PrizeTypeEnum::ITEM) {
-			return $this->reduceItem($prize, $userWon);
+			return $this->reduceItem($prize, $amount);
 		}
 
 		return false;
@@ -66,14 +71,15 @@ class BalanceRepository implements BalanceRepositoryInterface
 
 	/**
 	 * @param Balance $prize
-	 * @param UserWon $userWon
+	 * @param $amount
+	 *
 	 * @return bool
 	 */
-	private function reduceMoney($prize, $userWon) {
-		if ($prize->amount < $userWon->amount) {
+	private function reduceMoney($prize, $amount) {
+		if ($prize->amount < $amount) {
 			return false;
 		}
-		$prize->amount -= $userWon->amount;
+		$prize->amount -= $amount;
 		if ($prize->amount == 0) {
 			$prize->is_enabled = false;
 		}
@@ -81,8 +87,14 @@ class BalanceRepository implements BalanceRepositoryInterface
 		return true;
 	}
 
-	private function reduceItem($prize, $userWon) {
-		if ($prize->amount < $userWon->amount) {
+	/**
+	 * @param Balance $prize
+	 * @param $amount
+	 *
+	 * @return bool
+	 */
+	private function reduceItem($prize, $amount) {
+		if ($prize->amount < $amount) {
 			return false;
 		}
 		$prize->amount -= 1;

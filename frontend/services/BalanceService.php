@@ -24,9 +24,10 @@ class BalanceService implements BalanceServiceInterface
 	}
 
 	/**
-	 * @param $userWon
+	 * @param $prize_id
+	 * @param $amount
 	 */
-	public function acceptWon($userWon){
-		return $this->repository->acceptWon($userWon);
+	public function removeGiftAmountFromBalance($prize_id, $amount){
+		return $this->repository->removeGiftAmountFromBalance($prize_id, $amount);
 	}
 }

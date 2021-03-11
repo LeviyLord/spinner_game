@@ -19,6 +19,12 @@ use frontend\strategies\prize\handlers\MoneyHandler;
 class PrizeStrategy extends BaseStrategyContextHandlers
 {
 
+	public function __construct($prizeType)
+	{
+		$this->setStrategyName($prizeType);
+		parent::__construct([]);
+	}
+
 	/**
 	 * @return array
 	 */

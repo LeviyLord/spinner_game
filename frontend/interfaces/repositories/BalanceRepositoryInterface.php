@@ -15,8 +15,9 @@ interface BalanceRepositoryInterface {
 	public function getPrize();
 
 	/**
-	 * @param $userWon
+	 * @param $prize_id
+	 * @param $amount
 	 */
-	public function acceptWon($userWon);
+	public function removeGiftAmountFromBalance($prize_id, $amount);
 
 }
