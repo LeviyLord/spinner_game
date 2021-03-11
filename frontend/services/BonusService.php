@@ -3,7 +3,7 @@
 namespace frontend\services;
 
 use frontend\enums\UserWonStatusEnum;
-use frontend\interfaces\BonusServiceInterface;
+use frontend\interfaces\services\BonusServiceInterface;
 use frontend\interfaces\prize\BonusInterface;
 use frontend\interfaces\prize\PrizeInterface;
 use frontend\interfaces\UserWonInterface;

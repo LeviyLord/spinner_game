@@ -59,15 +59,4 @@ class UserWon extends ActiveRecord implements UserWonInterface
 		];
 	}
 
-	/**
-	 * @param string $status
-	 */
-	public function setStatus(string $status)
-	{
-		if(!in_array($status, self::ACCEPTED_STATUSES)){
-			throw new InvalidArgumentException('status is not available');
-		}
-	}
-
-
 }

@@ -1,7 +1,7 @@
 <?php
 
 
-namespace frontend\interfaces;
+namespace frontend\interfaces\services;
 
 
 use frontend\interfaces\prize\MoneyInterface;

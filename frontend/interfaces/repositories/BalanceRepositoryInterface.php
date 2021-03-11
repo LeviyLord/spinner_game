@@ -1,6 +1,6 @@
 <?php
 
-namespace frontend\interfaces;
+namespace frontend\interfaces\repositories;
 
 /**
  *
@@ -13,5 +13,11 @@ interface BalanceRepositoryInterface {
 	 * @return mixed
 	 */
 	public function getPrize();
+
+	/**
+	 * @param $prize_id
+	 * @param $amount
+	 */
+	public function removeGiftAmountFromBalance($prize_id, $amount);
 
 }
