@@ -4,6 +4,8 @@
 namespace frontend\interfaces\repositories;
 
 
+use yii\data\ActiveDataProvider;
+
 interface UserWonRepositoryInterface
 {
 	/**
@@ -22,4 +24,9 @@ interface UserWonRepositoryInterface
 	 */
 	public function convertationMoney($userWonId);
 
+	/**
+	 * @param array $condition
+	 * @return ActiveDataProvider
+	 */
+	public function all($condition = []);
 }

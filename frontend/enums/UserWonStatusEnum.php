@@ -10,5 +10,6 @@ class UserWonStatusEnum
 	const CANCELED = 1;
 	const CONVERTED = 2;
 	const APPROVAL = 3;
+	const SENDED = 4;
 
 }

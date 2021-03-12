@@ -4,13 +4,19 @@
 namespace frontend\services;
 
 
+use frontend\enums\UserWonStatusEnum;
 use frontend\interfaces\repositories\UserWonRepositoryInterface;
+use frontend\interfaces\services\PostServiceInterface;
 use frontend\interfaces\services\UserWonServiceInterface;
+use frontend\models\UserWon;
+use Yii;
+use yii\data\ActiveDataProvider;
 
 /**
  * Class BalanceService
  *
  * @property-read  UserWonRepositoryInterface $repository
+ * @property-read  PostServiceInterface $post
  */
 class UserWonService implements UserWonServiceInterface
 {
@@ -44,6 +50,27 @@ class UserWonService implements UserWonServiceInterface
 	{
 		$bonusAmount = $this->repository->convertationMoney($userWonId);
 		return $bonusAmount;
+	}
+
+	/**
+	 * @param array $condition
+	 * @return ActiveDataProvider
+	 */
+	public function all($condition = []): ActiveDataProvider
+	{
+		return $this->repository->all($condition);
+	}
+
+	public function sendBatch(array $userGifts)
+	{
+		foreach ($userGifts as $userGift) {
+			if (!($userGift instanceof UserWon)) {
+				throw new \InvalidArgumentException('not allowed object for shipping');
+			}
+			if (Yii::$app->post->initiate($userGift)) {
+				$userGift->status = UserWonStatusEnum::SENDED;
+			};
+		}
 	}
 
 }

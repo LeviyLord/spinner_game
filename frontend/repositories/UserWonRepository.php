@@ -5,11 +5,16 @@ namespace frontend\repositories;
 use frontend\enums\PrizeTypeEnum;
 use frontend\enums\UserWonStatusEnum;
 use frontend\exception\NotAvailablePrizeException;
+use frontend\helpers\ActiveRecordHelper;
 use frontend\interfaces\repositories\UserWonRepositoryInterface;
 use frontend\models\Bonus;
 use frontend\models\UserWon;
 use frontend\services\BonusService;
 use http\Exception\InvalidArgumentException;
+use yii\data\ActiveDataProvider;
+use yii\db\Exception as DbException;
+use yii\web\NotFoundHttpException;
+use yii\web\UnprocessableEntityHttpException;
 
 class UserWonRepository implements UserWonRepositoryInterface
 {
@@ -49,6 +54,27 @@ class UserWonRepository implements UserWonRepositoryInterface
 
 		return $bonusAmount;
 	}
+
+	/**
+	 * @param array $condition
+	 * @return ActiveDataProvider
+	 * @throws NotFoundHttpException
+	 * @throws UnprocessableEntityHttpException
+	 */
+	public function all(array $condition = []): ActiveDataProvider
+	{
+	try {
+		$giftDataProvider = new ActiveDataProvider([
+			'query' => ActiveRecordHelper::createQuery(new UserWon(), $condition)
+		]);
+		if ($giftDataProvider->count > 0) {
+			return $giftDataProvider;
+		}
+		throw new NotFoundHttpException();
+	} catch (DbException $e) {
+		throw new UnprocessableEntityHttpException('Problem with getting gift list');
+	}
+}
 
 	/**
 	 * @param $userWon

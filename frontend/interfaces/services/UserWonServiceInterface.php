@@ -4,6 +4,8 @@
 namespace frontend\interfaces\services;
 
 
+use yii\data\ActiveDataProvider;
+
 interface UserWonServiceInterface
 {
 	/**
@@ -21,5 +23,11 @@ interface UserWonServiceInterface
 	 * @return mixed
 	 */
 	public function convertationMoney($userWonId);
+
+	/**
+	 * @param array $condition
+	 * @return ActiveDataProvider
+	 */
+	public function all($condition = []);
 
 }

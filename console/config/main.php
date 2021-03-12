@@ -1,4 +1,8 @@
 <?php
+
+use frontend\repositories\UserWonRepository;
+use frontend\services\UserWonService;
+
 $params = array_merge(
     require __DIR__ . '/../../common/config/params.php',
     require __DIR__ . '/../../common/config/params-local.php',
@@ -30,6 +34,19 @@ return [
                 ],
             ],
         ],
+		'urlManager' => [
+			'enablePrettyUrl' => true,
+			'showScriptName' => false,
+			'rules' => [
+			],
+		],
+		'errorHandler' => [
+			'errorAction' => 'site/error',
+		],
+		'userWon' => [
+			'class' => UserWonService::class,
+			'repository' => new UserWonRepository(),
+		],
     ],
     'params' => $params,
 ];

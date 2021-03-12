@@ -1,11 +1,13 @@
 <?php
 
 use frontend\repositories\BalanceRepository;
+use frontend\repositories\mock\PostRepository;
 use frontend\repositories\UserWonRepository;
 use frontend\services\BalanceService;
 use frontend\services\BonusService;
 use frontend\services\ItemService;
 use frontend\services\MoneyService;
+use frontend\services\PostService;
 use frontend\services\UserWonService;
 
 $params = array_merge(
@@ -67,6 +69,10 @@ return [
 		],
 		'money' => [
 			'class' => MoneyService::class
+		],
+		'post' => [
+			'class' => PostService::class,
+			'repository' => new PostRepository(),
 		],
 		'i18n' => [
 			'translations' => [
