@@ -25,4 +25,12 @@ return [
 		'update_at' => '2020-09-13 19:49:17',
 		'amount' => 500,
     ],
+	'user_won3' => [
+		'user_id' => 1,
+		'prize_id' => 1,
+		'status' => 2,
+		'create_at' => '2021-12-03 7:00:01',
+		'update_at' => '2021-12-03 7:00:01',
+		'amount' => 872,
+	],
 ];
